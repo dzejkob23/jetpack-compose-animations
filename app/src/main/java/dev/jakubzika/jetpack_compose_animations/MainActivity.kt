@@ -140,7 +140,7 @@ private fun AnimatedTextExample() {
 }
 
 /**
- * Example of [rememberInfiniteTransition], [animateFloat]
+ * Example of [rememberInfiniteTransition], [animateFloat], [rotate]
  */
 @Composable
 private fun AnimatedProgressExample1() {
@@ -173,6 +173,9 @@ private fun AnimatedProgressExample1() {
     }
 }
 
+/**
+ * Example of [animateFloatAsState]
+ */
 @Composable
 private fun AnimatedProgressExample2() {
     Column(
@@ -204,7 +207,7 @@ private fun AnimatedProgressExample2() {
 }
 
 /**
- * Example of [AnimatedContent], [...transition, rotation,]
+ * Example of [animateContentSize], [animateFloatAsState], [rotate]
  */
 @Composable
 private fun AnimatedDropdownExample(data: Array<Pair<String, String>>) {
@@ -261,6 +264,9 @@ private fun AnimatedDropdownExample(data: Array<Pair<String, String>>) {
     }
 }
 
+/**
+ * Example of [AnimatedContent], [slideInHorizontally], [slideOutHorizontally]
+ */
 @Composable
 private fun AnimatedCarouselExample(data: Array<Pair<String, String>>) {
     val (currentIndex, setCurrentIndex) = remember { mutableStateOf(0) }
