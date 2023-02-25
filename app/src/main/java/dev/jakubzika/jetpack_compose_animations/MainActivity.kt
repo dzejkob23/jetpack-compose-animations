@@ -127,12 +127,18 @@ private fun AnimatedProgressExample1() {
             )
         )
         var state by remember { mutableStateOf(true) }
+        val transition = updateTransition(targetState = state, label = "animated_progress_transition")
+        val size by transition.animateDp(
+            label = "animated_progress_icon_size"
+        ) {
+            if (it) 56.dp else 72.dp
+        }
         Button(onClick = { state = state.not() }) { Text(text = "Klikni!") }
         Crossfade(targetState = state) {
             Icon(
                 modifier = Modifier
                     .rotate(if (it) rotation.value else 0f)
-                    .size(56.dp),
+                    .size(size),
                 imageVector = if (it) Icons.Default.Refresh else Icons.Default.CheckCircle,
                 contentDescription = ""
             )
@@ -149,7 +155,10 @@ private fun AnimatedProgressExample2() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         var progress by remember { mutableStateOf(0.5f) }
-        val animatedProgress by animateFloatAsState(targetValue = progress)
+        val animatedProgress by animateFloatAsState(
+            targetValue = progress,
+            animationSpec = spring(dampingRatio = Spring.DampingRatioHighBouncy)
+        )
         LinearProgressIndicator(
             modifier = Modifier
                 .fillMaxWidth()
@@ -179,8 +188,9 @@ private fun AnimatedProgressExample2() {
 @Composable
 private fun AnimatedDropdownExample(data: Array<Pair<String, String>>) {
     var expanded by remember { mutableStateOf(false) }
-    val angle: Float by animateFloatAsState(
-        targetValue = if (expanded) 90f else 0f,
+    val angle = if (expanded) 90f else 0f
+    val animatedAngle: Float by animateFloatAsState(
+        targetValue = angle,
         animationSpec = tween(
             durationMillis = 200,
             easing = LinearEasing
@@ -212,7 +222,7 @@ private fun AnimatedDropdownExample(data: Array<Pair<String, String>>) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowRight,
                 contentDescription = null,
-                modifier = Modifier.rotate(angle)
+                modifier = Modifier.rotate(animatedAngle)
             )
         }
         if (expanded) {
