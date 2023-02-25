@@ -112,7 +112,9 @@ private fun AnimatedTextExample() {
 @Composable
 private fun AnimatedProgressExample1() {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(88.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -127,12 +129,20 @@ private fun AnimatedProgressExample1() {
             )
         )
         var state by remember { mutableStateOf(true) }
-        val transition = updateTransition(targetState = state, label = "animated_progress_transition")
+        val transition =
+            updateTransition(targetState = state, label = "animated_progress_transition")
         val size by transition.animateDp(
-            label = "animated_progress_icon_size"
-        ) {
-            if (it) 56.dp else 72.dp
-        }
+            label = "animated_progress_icon_size",
+            transitionSpec = {
+                when {
+                    true isTransitioningTo false -> spring(
+                        stiffness = Spring.StiffnessLow,
+                        dampingRatio = Spring.DampingRatioHighBouncy
+                    )
+                    else -> tween(durationMillis = 200)
+                }
+            }
+        ) { if (it) 56.dp else 72.dp }
         Button(onClick = { state = state.not() }) { Text(text = "Klikni!") }
         Crossfade(targetState = state) {
             Icon(
