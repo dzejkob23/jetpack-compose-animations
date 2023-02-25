@@ -144,7 +144,7 @@ private fun AnimatedProgressExample1() {
             }
         ) { if (it) 56.dp else 72.dp }
         Button(onClick = { state = state.not() }) { Text(text = "Klikni!") }
-        Crossfade(targetState = state) {
+        transition.Crossfade {
             Icon(
                 modifier = Modifier
                     .rotate(if (it) rotation.value else 0f)
