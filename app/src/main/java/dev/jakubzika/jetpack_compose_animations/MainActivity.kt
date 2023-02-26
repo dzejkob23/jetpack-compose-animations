@@ -128,9 +128,9 @@ private fun AnimatedProgressExample1() {
                 )
             )
         )
-        var state by remember { mutableStateOf(true) }
+        var progress by remember { mutableStateOf(true) }
         val transition =
-            updateTransition(targetState = state, label = "animated_progress_transition")
+            updateTransition(targetState = progress, label = "animated_progress_transition")
         val size by transition.animateDp(
             label = "animated_progress_icon_size",
             transitionSpec = {
@@ -143,7 +143,7 @@ private fun AnimatedProgressExample1() {
                 }
             }
         ) { if (it) 56.dp else 72.dp }
-        Button(onClick = { state = state.not() }) { Text(text = "Klikni!") }
+        Button(onClick = { progress = progress.not() }) { Text(text = "Klikni!") }
         transition.Crossfade {
             Icon(
                 modifier = Modifier
