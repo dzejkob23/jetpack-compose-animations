@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -101,7 +104,7 @@ private fun AnimatedTextExample() {
             enter = fadeIn(),
             exit = fadeOut()
         ) {
-            Text(text = "CN Group - Nalejvárna", style = MaterialTheme.typography.h5)
+            Image(painter = painterResource(id = R.drawable.nalejvarna), contentDescription = null)
         }
     }
 }
@@ -209,7 +212,7 @@ private fun AnimatedDropdownExample(data: Array<Pair<String, String>>) {
     Column(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colors.primary.copy(alpha = 0.2f),
+                color = MaterialTheme.colors.secondary,
                 shape = RoundedCornerShape(16.dp)
             )
             .padding(8.dp)
@@ -324,6 +327,7 @@ fun ChatGPT_SpiralAnimation() {
             imageVector = Icons.Default.Favorite,
             contentDescription = null,
             modifier = Modifier
+                .size(32.dp)
                 .offset {
                     val x =
                         (spiralRadius * kotlin.math.cos(Math.toRadians(spiralAngle.toDouble()))).toFloat()
